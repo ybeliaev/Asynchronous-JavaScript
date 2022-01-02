@@ -41,7 +41,7 @@ promise.then(val=>console.log(val))
 Все обработчики ```.then``` на одном и том же промисе получают одно и то же значение – результат выполнения того же самого промиса. 
 
 ### TASKS
-* 1. Promise.all & Promise.allSettled
+* 1 Promise.all & Promise.allSettled
 ```javascript
 async function getPosts(){
     let response = await fetch('https://jsonplaceholder.typicode.com/users')
@@ -61,7 +61,27 @@ Promise.allSettled([getPosts(), getUsers()]).then(console.log)
 // 1: {status: 'fulfilled', value: Array(10)}
 // array of the objects
 ```
-* 2. Create a promise version of the async readFile function
+next example with Promise.all
+```javascript
+const util = require("util");
+const fs = require("fs");
+const readFile = util.promisify(fs.readFile);
+
+const files = ["./files/demofile.txt", "./files/demofile.other.txt"];
+
+let promises = files.map(name => readFile(name, "utf8"));
+Promise.all(promises)
+  .then(values => {
+    // <-- Uses .all
+    console.log(values);
+  })
+  .catch(err => console.error("Error: ", err));
+
+```
+
+
+
+* 2 Create a promise version of the async readFile function
   
 ```javascript
   const fs = require("fs");
