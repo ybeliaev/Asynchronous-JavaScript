@@ -53,6 +53,11 @@ async function getUsers(){
 }
 
 Promise.all([getPosts(), getUsers()]).then(console.log)
-// [Array(10), Array(10)]
+// [Array(10), Array(10)] 
+// array of arrays
 
+Promise.allSettled([getPosts(), getUsers()]).then(console.log)
+// 0: {status: 'fulfilled', value: Array(10)}
+// 1: {status: 'fulfilled', value: Array(10)}
+// array of objects
 ```
